@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 //bootstraps spring application
 @SpringBootApplication
-//to handle incoming http requests
+//to handle incoming/outgoing http requests
 @RestController
 public class DemoApplication {
 
@@ -18,12 +18,13 @@ public class DemoApplication {
 		SpringApplication.run(DemoApplication.class, args);
 	}
 	//http get method
-	//tells Spring to use our hello() method to answer requests that get sent to the http://localhost:8080/hello address.
+	//@GetMapping maps endpoint '/hello' to hello() method to answer requests that get sent to the http://localhost:8080/hello address.
 	@GetMapping("/hello")
 	//specifying query parameter
 	//@RequestParam is telling Spring to expect a name value in the request
-	public String hello(@RequestParam(value = "Anmol", defaultValue = "World") String name, @RequestParam String age) {
-		return String.format("Hello %s!\n age: %s", name, age);
+	//URL Pattern: /params?key=value&key1=value1 
+	public String hello(@RequestParam(value = "name", defaultValue = "World") String name, @RequestParam String age) {
+		return String.format("Hello %s! age: %s", name, age);
 	}
 
 }
